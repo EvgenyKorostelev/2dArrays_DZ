@@ -1,5 +1,5 @@
-﻿// Задайте двумерный массив. Напишите программу,
-// которая поменяет местами первую и последнюю строку массива.
+﻿// Задайте прямоугольный двумерный массив. Напишите программу,
+// которая будет находить строку с наименьшей суммой элементов.
 
 int [,] Create2dArray(int row, int col, int min, int max)
 {
@@ -26,27 +26,29 @@ void Show2dArray(int [,] array)
     }
 } 
 
+
 void Func(int[,] array)
 {
-    int[] temp = new int[array.GetLength(1)];
-
-    for (int j = 0; j < array.GetLength(1); j++)
-    {
-        temp [j] = array [0, j]; 
-    }
-
+    int indexMinRow = 0;
+    int[] temp = new int[array.GetLength(0)];
+    int sum = 0;
     
-    for (int j = 0; j < array.GetLength(1); j++)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        array [0, j] = array [array.GetLength(0) - 1, j]; 
-    }
-    
-    for (int j = 0; j < array.GetLength(1); j++)
-    {
-        array [array.GetLength(0)-1, j] = temp [j]; 
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            sum = sum + array[i,j];
+        }
+        temp [i] = sum;
+        sum = 0;
     }
 
-    Show2dArray(array);
+    for (int m = 1; m < temp.Length; m++)
+    {
+        if(temp[m] < temp[0])
+        indexMinRow = m;
+    }
+    Console.Write($"Строка с индексом: {indexMinRow}"); 
 } 
 
 Console.Write("Enter row number: ");
