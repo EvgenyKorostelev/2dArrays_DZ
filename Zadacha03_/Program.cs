@@ -1,6 +1,8 @@
 ﻿// Задайте прямоугольный двумерный массив. Напишите программу,
 // которая будет находить строку с наименьшей суммой элементов.
 
+using System.ComponentModel.DataAnnotations;
+
 int [,] Create2dArray(int row, int col, int min, int max)
 {
     int [,] array = new int[row, col];
@@ -26,13 +28,21 @@ void Show2dArray(int [,] array)
     }
 } 
 
+void ShowArray(int [] array)
+{
+    for (int i = 0; i < array.Length; i++)
+        {
+            Console.Write(array[i] + " ");
+        }
+        Console.WriteLine();
+}
 
 void Func(int[,] array)
 {
     int indexMinRow = 0;
+
     int[] temp = new int[array.GetLength(0)];
     int sum = 0;
-    
     for (int i = 0; i < array.GetLength(0); i++)
     {
         for (int j = 0; j < array.GetLength(1); j++)
@@ -43,11 +53,19 @@ void Func(int[,] array)
         sum = 0;
     }
 
-    for (int m = 1; m < temp.Length; m++)
+    ShowArray(temp);
+    Console.WriteLine();
+
+    int minSum = temp[0];
+    for (int m = 0; m < temp.Length; m++)
     {
         if(temp[m] < temp[0])
-        indexMinRow = m;
+        {
+            indexMinRow = m;
+            minSum = temp[m];
+        }
     }
+    Console.WriteLine($"Наименьшая сумма элементов строки равна: {minSum}");
     Console.Write($"Строка с индексом: {indexMinRow}"); 
 } 
 
